@@ -7,15 +7,26 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	px "github.com/GolangToolKits/go-http-proxy"
 	mux "github.com/GolangToolKits/grrt"
 	"github.com/Learning-Go-Server-Development/OrderServiceV3/handlers"
 	"github.com/Learning-Go-Server-Development/OrderServiceV3/manager"
+	"github.com/Learning-Go-Server-Development/OrderServiceV3/security"
 )
 
 func TestServiceHandler_GetProduct(t *testing.T) {
 	var mm manager.MockServiceManager
 	m := mm.New()
 	var hh handlers.ServiceHandler
+
+	//OAuth2 JWT Security---------
+	var sec security.OAuth2Security
+	sec.ValadationHost = "http://www.goauth2.com"
+	sec.Proxy = &px.GoProxy{}
+	sec.ClientID = 52
+	hh.Security = sec.New()
+	//-----------------------------
+
 	hh.Manager = m
 
 	tests := []struct {
@@ -50,6 +61,7 @@ func TestServiceHandler_GetProduct(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			mm.MockProduct = tt.c
 			r, _ := http.NewRequest("GET", "/ffllist", nil)
+			r.Header.Set("Authorization", authHeader)
 			vars := map[string]string{
 				"sku": tt.sku,
 			}

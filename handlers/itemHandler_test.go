@@ -8,15 +8,26 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	px "github.com/GolangToolKits/go-http-proxy"
 	mux "github.com/GolangToolKits/grrt"
 	"github.com/Learning-Go-Server-Development/OrderServiceV3/handlers"
 	"github.com/Learning-Go-Server-Development/OrderServiceV3/manager"
+	"github.com/Learning-Go-Server-Development/OrderServiceV3/security"
 )
 
 func TestServiceHandler_AddItem(t *testing.T) {
 	var mm manager.MockServiceManager
 	m := mm.New()
 	var hh handlers.ServiceHandler
+
+	//OAuth2 JWT Security---------
+	var sec security.OAuth2Security
+	sec.ValadationHost = "http://www.goauth2.com"
+	sec.Proxy = &px.GoProxy{}
+	sec.ClientID = 52
+	hh.Security = sec.New()
+	//-----------------------------
+
 	hh.Manager = m
 
 	tests := []struct {
@@ -52,6 +63,7 @@ func TestServiceHandler_AddItem(t *testing.T) {
 
 			r, _ := http.NewRequest("POST", "/ffllist", tt.json)
 			r.Header.Set("Content-Type", tt.ctype)
+			r.Header.Set("Authorization", authHeader)
 			w := httptest.NewRecorder()
 			// TODO: construct the receiver type.
 			//var h handlers.ServiceHandler
@@ -72,6 +84,15 @@ func TestServiceHandler_UpdateItem(t *testing.T) {
 	var mm manager.MockServiceManager
 	m := mm.New()
 	var hh handlers.ServiceHandler
+
+	//OAuth2 JWT Security---------
+	var sec security.OAuth2Security
+	sec.ValadationHost = "http://www.goauth2.com"
+	sec.Proxy = &px.GoProxy{}
+	sec.ClientID = 52
+	hh.Security = sec.New()
+	//-----------------------------
+
 	hh.Manager = m
 
 	tests := []struct {
@@ -106,6 +127,7 @@ func TestServiceHandler_UpdateItem(t *testing.T) {
 
 			r, _ := http.NewRequest("PUT", "/ffllist", tt.json)
 			r.Header.Set("Content-Type", tt.ctype)
+			r.Header.Set("Authorization", authHeader)
 			w := httptest.NewRecorder()
 			// TODO: construct the receiver type.
 			//var h handlers.ServiceHandler
@@ -126,6 +148,15 @@ func TestServiceHandler_GetItems(t *testing.T) {
 	var mm manager.MockServiceManager
 	m := mm.New()
 	var hh handlers.ServiceHandler
+
+	//OAuth2 JWT Security---------
+	var sec security.OAuth2Security
+	sec.ValadationHost = "http://www.goauth2.com"
+	sec.Proxy = &px.GoProxy{}
+	sec.ClientID = 52
+	hh.Security = sec.New()
+	//-----------------------------
+
 	hh.Manager = m
 
 	tests := []struct {
@@ -163,6 +194,7 @@ func TestServiceHandler_GetItems(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			mm.MockItems = tt.i
 			r, _ := http.NewRequest("GET", "/ffllist", nil)
+			r.Header.Set("Authorization", authHeader)
 			vars := map[string]string{
 				"oid": tt.id,
 			}
@@ -188,6 +220,15 @@ func TestServiceHandler_DeleteItem(t *testing.T) {
 	var mm manager.MockServiceManager
 	m := mm.New()
 	var hh handlers.ServiceHandler
+
+	//OAuth2 JWT Security---------
+	var sec security.OAuth2Security
+	sec.ValadationHost = "http://www.goauth2.com"
+	sec.Proxy = &px.GoProxy{}
+	sec.ClientID = 52
+	hh.Security = sec.New()
+	//-----------------------------
+
 	hh.Manager = m
 
 	tests := []struct {
@@ -215,6 +256,7 @@ func TestServiceHandler_DeleteItem(t *testing.T) {
 				Success: tt.want2,
 			}
 			r, _ := http.NewRequest("DELETE", "/ffllist", nil)
+			r.Header.Set("Authorization", authHeader)
 			vars := map[string]string{
 				"id": tt.id,
 			}

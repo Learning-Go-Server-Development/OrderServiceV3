@@ -7,10 +7,12 @@ import (
 	"net/http"
 
 	"github.com/Learning-Go-Server-Development/OrderServiceV3/manager"
+	"github.com/Learning-Go-Server-Development/OrderServiceV3/security"
 )
 
 type ServiceHandler struct {
-	Manager manager.Manager
+	Manager  manager.Manager
+	Security security.Security
 }
 
 func (h *ServiceHandler) New() Handler {
