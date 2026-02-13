@@ -8,7 +8,7 @@ import (
 )
 
 type MockOAuth2Security struct {
-	ValadationHost string
+	ValidationHost string
 	Proxy          px.Proxy
 	ClientID       int64
 	MockValid      bool

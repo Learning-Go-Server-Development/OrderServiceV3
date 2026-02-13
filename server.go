@@ -87,7 +87,7 @@ func main() {
 
 	//OAuth2 JWT Security---------
 	var sec security.OAuth2Security
-	sec.ValadationHost = validationHost
+	sec.ValidationHost = validationHost
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
 	hh.Security = sec.New()

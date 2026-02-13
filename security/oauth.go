@@ -11,9 +11,20 @@ import (
 )
 
 type OAuth2Security struct {
-	ValadationHost string
+	ValidationHost string
 	Proxy          px.Proxy
 	ClientID       int64
+}
+
+type ValidationReq struct {
+	ClientID    int64  `json:"clientId"`
+	Role        string `json:"role"`
+	URL         string `json:"url"`
+	AccessToken string `json:"accessToken"`
+}
+
+type ValidationResp struct {
+	Valid bool `json:"valid"`
 }
 
 func (s *OAuth2Security) ValidateToken(claim *jv.Claim, r *http.Request) bool {
@@ -32,7 +43,7 @@ func (s *OAuth2Security) ValidateToken(claim *jv.Claim, r *http.Request) bool {
 	vreq.AccessToken = token
 	aJSON, err := json.Marshal(vreq)
 
-	req, err := http.NewRequest(http.MethodPost, s.ValadationHost+"/rs/token/validate", bytes.NewBuffer(aJSON))
+	req, err := http.NewRequest(http.MethodPost, s.ValidationHost+"/rs/token/validate", bytes.NewBuffer(aJSON))
 	req.Header.Set("Content-Type", "application/json")
 	if err == nil {
 		var resp ValidationResp

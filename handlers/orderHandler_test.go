@@ -22,7 +22,7 @@ func TestServiceHandler_AddOrder(t *testing.T) {
 
 	//OAuth2 JWT Security---------
 	var sec security.OAuth2Security
-	sec.ValadationHost = "http://www.goauth2.com"
+	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
 	hh.Security = sec.New()
@@ -86,7 +86,7 @@ func TestServiceHandler_UpdateOrder(t *testing.T) {
 
 	//OAuth2 JWT Security---------
 	var sec security.OAuth2Security
-	sec.ValadationHost = "http://www.goauth2.com"
+	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
 	hh.Security = sec.New()
@@ -147,7 +147,7 @@ func TestServiceHandler_GetOrder(t *testing.T) {
 
 	//OAuth2 JWT Security---------
 	var sec security.OAuth2Security
-	sec.ValadationHost = "http://www.goauth2.com"
+	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
 	hh.Security = sec.New()
@@ -216,7 +216,7 @@ func TestServiceHandler_GetCurrentOrders(t *testing.T) {
 
 	//OAuth2 JWT Security---------
 	var sec security.OAuth2Security
-	sec.ValadationHost = "http://www.goauth2.com"
+	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
 	hh.Security = sec.New()
@@ -288,7 +288,7 @@ func TestServiceHandler_GetPastOrders(t *testing.T) {
 
 	//OAuth2 JWT Security---------
 	var sec security.OAuth2Security
-	sec.ValadationHost = "http://www.goauth2.com"
+	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
 	hh.Security = sec.New()
@@ -360,7 +360,7 @@ func TestServiceHandler_DeleteOrder(t *testing.T) {
 
 	//OAuth2 JWT Security---------
 	var sec security.OAuth2Security
-	sec.ValadationHost = "http://www.goauth2.com"
+	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
 	hh.Security = sec.New()

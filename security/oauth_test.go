@@ -10,9 +10,13 @@ import (
 )
 
 func TestOAuth2Security_ValidateToken(t *testing.T) {
-	var ss security.OAuth2Security
+	var token = "eNq8lM1y6jgQhd8o5Z8A8ZI4WEhjmcI/stAOSSTIlgkzHmzLTz8lhtzK4qZgcctLV3WfPudzqw8GHTkQaqMQLEboJgq28JTORAjnsD5TEqLg6WDQdkd1y72ohtV5ARs9CmMLZLelxNm/QRWHaJQltEIVB1rzU/q+85FmgFwk0Ee+xrbmKMutrVlzJ3Il+DBxk3Q8gy1syLMdinPh43w5JKPocdirfRk5sPq03wN+Wzk4X/bvWa8kCP5h5aw40FcNq0+1K5OK0WSEqlc7bzizcuZkdlZVmDhEJ9FEF2lDNUm7L8lFRkElGlLbun0ZtcLY4KjjgJCi1iOszvxg0NstS8a9QWeF1Vu5OOtV0QQty+AcnsjI6DX/V+0rB0MnPVITgtCtZ4Zz3ML6NnsVtRwEPitTUtS12ijYiRPu9jTVPAtcAdKjBMV3TZSGcJ7kKIjXrdre8l09FHp15ZOvWqit/8LydYVHjGXxVbsth5b7UrOIZNmtZ5MvvZ98W6axj8bYCwwDxMReVLMQfstw1XDxyWn/LKftY5wonoKP/zAfn/QMRA7LpmBUPLpLNSsHPdEuPT++S1LLSXZpd5fTziejBMG/jMKOecT5nvN/ncK8Z8Pil050vRFXhjgvhjhEV582o6SJFgr+MFPfeuohMT+wtNlUYIQJKkkTh3uuFio4MpAae9sYxVN57DfZXY+daFJ9Y2hEQy7T/NOPu/9UrFHH1qSaxs/yrh/uo5pRNMb+61H42wne4mp4/C2mmgMy0d2Cj96tIwO/50Sp89SPs9Z/cZ6Z/MzDhvR/064RL86idJNxc/pQi81hns1i8leI/wsAAP///yQN5w=="
+
+	var ss security.MockOAuth2Security
+
+	//var ss security.OAuth2Security
 	ss.ClientID = 52
-	ss.ValadationHost = "http://www.goauth2.com"
+	ss.ValidationHost = "http://www.goauth2.com"
 	ss.Proxy = &px.GoProxy{}
 	tests := []struct {
 		name string // description of this test case
@@ -21,6 +25,7 @@ func TestOAuth2Security_ValidateToken(t *testing.T) {
 		r          *http.Request
 		authHeader string
 		want       bool
+		mockResp   bool
 	}{
 		// TODO: Add test cases.
 		{
@@ -30,7 +35,8 @@ func TestOAuth2Security_ValidateToken(t *testing.T) {
 				URL:  "/rs/order/add",
 			},
 			want:       true,
-			authHeader: "Bearer eNq8lMtyozwQhZ/oT2GInWLp2EaWisvPTcjaWZIvAuG4hjEgnn5KjDOVxaTsxRT77tPnfGr1QaMzA1xGEsF8gLNQwgZekjlfwQWsrgSvkPty0CjeEdUw26tgeX2DtRq4NgWijQm29mso/RUaRAGNUMmAUuySHHcOUhTgmwDqzLaBqTmLIjY1W2Z5MwFO2q/DlqWwgTV+NUODjDvButLhOp4FaSf3hWfB8qMPB95FGeyidd4f004K4P6gxTw/kHcFyw+5K8KSknCAspM7u7/SYm6lZlaZa3+FLrz2bsKEqsNmX+Cb8NyS17gydfvCa7g2wVHLAMZ5pQZYXtlBo/U9S8rsXqW50duMvvLabWgKF/CCB0rG/J+17wz0rbBxhTFC9555kAUNrO6zN17DgOvQIsF5VclIwpZfgnZPEsVSd8ZBchYg/6qJkhVchBly/W0j43u+0UOuNiOfbNNAZfznhu+M21gbFp+1cdE3zBGKejhN7z1RtrS/822Y+g4afNvVFGDt215FV/BLhlFjFlys5t9yip/jRIIp+DhP83FwR4Fn0XQKRvmzu1TRolcT7dLr87sklJhkl3YPOe0cPAjg/qQEttTG1tecv3VyfUz7tz863ngjRoZBlvf+Co0+TUZBQsUl/GamuvdUfai/YWmySVdz7ZaChBazZ4pL90xBos1toySYymMXpQ89trxO1J2h5jW+TfOmp4dvyreopVtcTuNn+dAPc1BFCRp85/3MnXiCv7jpn/+LiWIAT3S34LN360zB3zkRYr2caHmCy/8tqzsNx72Hluy/YnMMhm28ICIJ3GW2KCIVEfm6/BUAAP//8e4NqQ==",
+			authHeader: "Bearer " + token,
+			mockResp:   true,
 		},
 		{
 			name: "test 2",
@@ -41,11 +47,13 @@ func TestOAuth2Security_ValidateToken(t *testing.T) {
 			want: false,
 			//bad token
 			authHeader: "Bearer eNq8lMtyozwQhZ///DlqWwgTV",
+			mockResp:   false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			// TODO: construct the receiver type.
+			ss.MockValid = tt.mockResp
 			r, _ := http.NewRequest("POST", "/ffllist", nil)
 			r.Header.Set("Authorization", tt.authHeader)
 			r.Header.Set("Content-Type", "application/json")

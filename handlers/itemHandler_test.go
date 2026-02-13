@@ -22,7 +22,7 @@ func TestServiceHandler_AddItem(t *testing.T) {
 
 	//OAuth2 JWT Security---------
 	var sec security.OAuth2Security
-	sec.ValadationHost = "http://www.goauth2.com"
+	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
 	hh.Security = sec.New()
@@ -87,7 +87,7 @@ func TestServiceHandler_UpdateItem(t *testing.T) {
 
 	//OAuth2 JWT Security---------
 	var sec security.OAuth2Security
-	sec.ValadationHost = "http://www.goauth2.com"
+	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
 	hh.Security = sec.New()
@@ -151,7 +151,7 @@ func TestServiceHandler_GetItems(t *testing.T) {
 
 	//OAuth2 JWT Security---------
 	var sec security.OAuth2Security
-	sec.ValadationHost = "http://www.goauth2.com"
+	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
 	hh.Security = sec.New()
@@ -223,7 +223,7 @@ func TestServiceHandler_DeleteItem(t *testing.T) {
 
 	//OAuth2 JWT Security---------
 	var sec security.OAuth2Security
-	sec.ValadationHost = "http://www.goauth2.com"
+	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
 	hh.Security = sec.New()
