@@ -13,6 +13,7 @@ import (
 	"github.com/Learning-Go-Server-Development/OrderServiceV3/delegate"
 	"github.com/Learning-Go-Server-Development/OrderServiceV3/handlers"
 	"github.com/Learning-Go-Server-Development/OrderServiceV3/manager"
+	"github.com/Learning-Go-Server-Development/OrderServiceV3/security"
 )
 
 func main() {
@@ -21,6 +22,7 @@ func main() {
 	var dbUser string
 	var dbPassword string
 	var orderServiceHost string
+	var validationHost string
 
 	if os.Getenv("DB_HOST") != "" {
 		dbHost = os.Getenv("DB_HOST")
@@ -44,6 +46,12 @@ func main() {
 		orderServiceHost = os.Getenv("ORDER_SERVICE_HOST")
 	} else {
 		orderServiceHost = "http://localhost:3001/rs"
+	}
+
+	if os.Getenv("VALIDATION_HOST") != "" {
+		validationHost = os.Getenv("VALIDATION_HOST")
+	} else {
+		validationHost = "http://www.goauth2.com"
 	}
 
 	//create database
@@ -76,6 +84,15 @@ func main() {
 	sm.OrderServiceHost = orderServiceHost
 
 	var hh handlers.ServiceHandler
+
+	//OAuth2 JWT Security---------
+	var sec security.OAuth2Security
+	sec.ValadationHost = validationHost
+	sec.Proxy = &px.GoProxy{}
+	sec.ClientID = 52
+	hh.Security = sec.New()
+	//-----------------------------
+
 	hh.Manager = sm.New()
 	h := hh.New()
 
