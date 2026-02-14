@@ -21,7 +21,9 @@ func TestServiceHandler_AddOrder(t *testing.T) {
 	var hh handlers.ServiceHandler
 
 	//OAuth2 JWT Security---------
-	var sec security.OAuth2Security
+	// var sec security.OAuth2Security
+	var sec security.MockOAuth2Security
+	sec.MockValid = true
 	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
@@ -85,7 +87,9 @@ func TestServiceHandler_UpdateOrder(t *testing.T) {
 	var hh handlers.ServiceHandler
 
 	//OAuth2 JWT Security---------
-	var sec security.OAuth2Security
+	// var sec security.OAuth2Security
+	var sec security.MockOAuth2Security
+	sec.MockValid = true
 	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
@@ -146,7 +150,9 @@ func TestServiceHandler_GetOrder(t *testing.T) {
 	var hh handlers.ServiceHandler
 
 	//OAuth2 JWT Security---------
-	var sec security.OAuth2Security
+	// var sec security.OAuth2Security
+	var sec security.MockOAuth2Security
+	sec.MockValid = true
 	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
@@ -215,7 +221,9 @@ func TestServiceHandler_GetCurrentOrders(t *testing.T) {
 	var hh handlers.ServiceHandler
 
 	//OAuth2 JWT Security---------
-	var sec security.OAuth2Security
+	// var sec security.OAuth2Security
+	var sec security.MockOAuth2Security
+	sec.MockValid = true
 	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
@@ -287,7 +295,9 @@ func TestServiceHandler_GetPastOrders(t *testing.T) {
 	var hh handlers.ServiceHandler
 
 	//OAuth2 JWT Security---------
-	var sec security.OAuth2Security
+	// var sec security.OAuth2Security
+	var sec security.MockOAuth2Security
+	sec.MockValid = true
 	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
@@ -359,7 +369,9 @@ func TestServiceHandler_DeleteOrder(t *testing.T) {
 	var hh handlers.ServiceHandler
 
 	//OAuth2 JWT Security---------
-	var sec security.OAuth2Security
+	// var sec security.OAuth2Security
+	var sec security.MockOAuth2Security
+	sec.MockValid = true
 	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
