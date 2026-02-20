@@ -29,7 +29,7 @@ func (s *ServiceManager) GetCustomer(phone string) *Customer {
 	return &rtn
 }
 
-func (s *ServiceManager) GetCustomerAdresses(cid int64) *[]delegate.Address {
+func (s *ServiceManager) GetCustomerAddresses(cid int64) *[]delegate.Address {
 	var rtn = []delegate.Address{}
 	if cid != 0 {
 		var pads []delegate.ProxyAddress

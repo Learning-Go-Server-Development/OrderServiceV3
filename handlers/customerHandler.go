@@ -55,7 +55,7 @@ func (h *ServiceHandler) GetCustomerAddresses(w http.ResponseWriter, r *http.Req
 			var cidStr = vars["cid"]
 			cid, ciderr := strconv.ParseInt(cidStr, 10, 64)
 			if ciderr == nil {
-				al := h.Manager.GetCustomerAdresses(cid)
+				al := h.Manager.GetCustomerAddresses(cid)
 				if al != nil {
 					w.WriteHeader(http.StatusOK)
 					resJSON, _ := json.Marshal(al)

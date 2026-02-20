@@ -73,7 +73,7 @@ func (s *MockServiceManager) GetCustomer(phone string) *Customer {
 	return s.MockCustomer
 }
 
-func (s *MockServiceManager) GetCustomerAdresses(cid int64) *[]delegate.Address {
+func (s *MockServiceManager) GetCustomerAddresses(cid int64) *[]delegate.Address {
 	return s.MockCustomerAddresses
 }
 

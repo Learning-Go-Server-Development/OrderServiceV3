@@ -87,7 +87,7 @@ func TestServiceManager_GetCustomerAdresses(t *testing.T) {
 			// TODO: construct the receiver type.
 
 			s := ss.New()
-			got := s.GetCustomerAdresses(tt.cid)
+			got := s.GetCustomerAddresses(tt.cid)
 			// TODO: update the condition below to compare got with tt.want.
 			if (*got)[0].Street != tt.want {
 				t.Errorf("GetCustomerAdresses() = %v, want %v", got, tt.want)

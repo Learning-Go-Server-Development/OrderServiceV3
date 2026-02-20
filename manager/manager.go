@@ -19,5 +19,5 @@ type Manager interface {
 
 	GetCustomer(phone string) *Customer
 
-	GetCustomerAdresses(cid int64) *[]delegate.Address
+	GetCustomerAddresses(cid int64) *[]delegate.Address
 }
