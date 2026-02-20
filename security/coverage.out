@@ -1,0 +1,10 @@
+mode: set
+github.com/Learning-Go-Server-Development/OrderServiceV3/security/mockAuth2.go:17.83,19.2 1 1
+github.com/Learning-Go-Server-Development/OrderServiceV3/security/mockAuth2.go:21.45,23.2 1 1
+github.com/Learning-Go-Server-Development/OrderServiceV3/security/oauth.go:30.79,35.26 5 0
+github.com/Learning-Go-Server-Development/OrderServiceV3/security/oauth.go:35.26,37.3 1 0
+github.com/Learning-Go-Server-Development/OrderServiceV3/security/oauth.go:39.2,48.16 9 0
+github.com/Learning-Go-Server-Development/OrderServiceV3/security/oauth.go:48.16,51.35 3 0
+github.com/Learning-Go-Server-Development/OrderServiceV3/security/oauth.go:51.35,53.4 1 0
+github.com/Learning-Go-Server-Development/OrderServiceV3/security/oauth.go:55.2,55.12 1 0
+github.com/Learning-Go-Server-Development/OrderServiceV3/security/oauth.go:58.41,60.2 1 0

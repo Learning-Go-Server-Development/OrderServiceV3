@@ -93,7 +93,9 @@ func TestServiceHandler_GetCustomerAddresses(t *testing.T) {
 	var hh handlers.ServiceHandler
 
 	//OAuth2 JWT Security---------
-	var sec security.OAuth2Security
+	// var sec security.OAuth2Security
+	var sec security.MockOAuth2Security
+	sec.MockValid = true
 	sec.ValidationHost = "http://www.goauth2.com"
 	sec.Proxy = &px.GoProxy{}
 	sec.ClientID = 52
